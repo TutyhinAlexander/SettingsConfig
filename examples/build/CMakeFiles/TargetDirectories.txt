@@ -1,0 +1,3 @@
+/home/pi/projects/SettingsConfig/examples/build/CMakeFiles/SettingsConfigTest.dir
+/home/pi/projects/SettingsConfig/examples/build/CMakeFiles/edit_cache.dir
+/home/pi/projects/SettingsConfig/examples/build/CMakeFiles/rebuild_cache.dir

@@ -2,7 +2,7 @@ add_library(SettingsConfig STATIC)
 add_library(Tools::SettingsConfig ALIAS SettingsConfig)
 
 target_compile_features(SettingsConfig PRIVATE cxx_std_17)
-target_sources(SettingsConfig PRIVATE SettingsConfig.cpp)
+target_sources(SettingsConfig PRIVATE SettingsConfig.cpp SettingsWindow.cpp)
 target_include_directories(SettingsConfig PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>")
 
 ## Installing

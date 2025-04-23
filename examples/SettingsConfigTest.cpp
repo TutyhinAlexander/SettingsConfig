@@ -39,13 +39,6 @@ void OnSaveClicked(int state, void *userdata)
 	sc.Save(CONFIG_PATH);	
 }
 
-void OnChkCallback(int state, void *userdata)
-{
-	Logger::Log("OnChkCallback state=%d\n", state);
-	*((bool*)userdata) = state == 1 ? true : false;
-}
-
-
 int main()
 {
 	InitLogger();
@@ -73,7 +66,7 @@ int main()
 	
 	sc.GetBool("root.section.bool_setting", boolVal);
 	Logger::Log("  boolVal=%s\n", boolVal ? "true" : "false");
-	ctrlBar.AddCheckbox("Bool Val:", OnChkCallback, &boolVal);
+	ctrlBar.AddCheckbox("Bool Val:", boolVal);
 	
 	
 	Mat img(512, 512, CV_8UC3, Scalar(255, 255, 255));

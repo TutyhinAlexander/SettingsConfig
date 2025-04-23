@@ -2,6 +2,7 @@
 #This script will install SettingsConfig library
 
 #build
+clear
 sudo rm -rf build
 mkdir build 
 cd build

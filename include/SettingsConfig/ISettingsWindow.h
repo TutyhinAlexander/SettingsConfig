@@ -13,7 +13,7 @@ namespace Tools
 		public:
 			//virtual void ShowWindow() = 0;
 			virtual void AddButton(const char* btnName, ButtonCallback onChangeCallback, void* userData) = 0;
-			virtual void AddCheckbox(const char* chkName, ButtonCallback onChangeCallback, void* userData) = 0;
+			virtual void AddCheckbox(const char* chkName, bool& setting, ButtonCallback onChangeCallback = NULL, void* userData = NULL) = 0;
 			virtual void AddTrackbar(const char* settingName, int& setting, int maxVal, TrackbarCallback onChangeCallback = NULL, void* userData = NULL) = 0;
 			virtual void AddTrackbar(const char* settingName, float& setting, float maxVal, int precision = 2, TrackbarCallback onChangeCallback = NULL, void* userData = NULL) = 0; // 10^(precision) multiplier for translate to int and back
 	};

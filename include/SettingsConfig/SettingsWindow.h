@@ -33,18 +33,34 @@ namespace Tools
 	}
     };
     
+    struct CheckboxInfo
+    {
+	bool* srcValue;
+	ButtonCallback onChangeCallback;
+	void* userData;
+	
+	CheckboxInfo(bool* src, ButtonCallback callback, void* data)
+	{
+	    srcValue = src;
+	    onChangeCallback = callback;
+	    userData = data;
+	}
+    };    
+    
     class SettingsWindow : public ISettingsWindow
     {
 	private:
 	    map<const char*, FloatToIntInfo*> floatSettings;
+	    map<const char*, CheckboxInfo*> boolSettings;
 	    
-	    static void onFloatTrackbarChanged(int pos, void *userdata);
+	    static void OnFloatTrackbarChanged(int pos, void *userdata);
+	    static void OnCheckboxChanged(int state, void *userdata);
 	    
 	public:
 	    ~SettingsWindow();
 	
 	    void AddButton(const char* btnName, ButtonCallback onChangeCallback, void* userData);
-	    void AddCheckbox(const char* chkName, ButtonCallback onChangeCallback, void* userData);
+	    void AddCheckbox(const char* chkName, bool& setting, ButtonCallback onChangeCallback = NULL, void* userData = NULL);
 	    void AddTrackbar(const char* settingName, int& setting, int maxVal, TrackbarCallback onChangeCallback = NULL, void* userData = NULL);
 	    void AddTrackbar(const char* settingName, float& setting, float maxVal, int precision = 2, TrackbarCallback onChangeCallback = NULL, void* userData = NULL); // 10^(precision) multiplier for translate to int and back
     };

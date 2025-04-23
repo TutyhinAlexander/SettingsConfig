@@ -1,7 +1,6 @@
 #include "SettingsConfig/SettingsWindow.h"
 #include <cmath>
-#include <iostream>
-#include <utility>
+//#include <iostream>
 
 using namespace cv;
 using namespace std;
@@ -12,18 +11,24 @@ namespace Tools
     {
 	for(const auto& pair : floatSettings)
 	    delete(pair.second);
+	for(const auto& pair : boolSettings)
+	    delete(pair.second);	    
     }
  
-    void SettingsWindow::onFloatTrackbarChanged(int pos, void *userdata)
+    void SettingsWindow::OnFloatTrackbarChanged(int pos, void *userdata)
     {
-	pair<SettingsWindow*, const char*>* params = (pair<SettingsWindow*, const char*>*)userdata;
-	const char* settingName = params->second;
-	FloatToIntInfo* info = params->first->floatSettings[settingName];
+	FloatToIntInfo* info = (FloatToIntInfo*)userdata;
 	*(info->srcValue) = (float)(info->value) / info->precisionCoeff;
 	if(info->onChangeCallback != NULL)
-	{
 	    info->onChangeCallback(pos, info->userData);
-	}
+    }
+    
+    void SettingsWindow::OnCheckboxChanged(int state, void *userdata)
+    {
+	CheckboxInfo* info = (CheckboxInfo*)userdata;
+	*(info->srcValue) = state == 1 ? true : false;
+	if(info->onChangeCallback != NULL)
+	    info->onChangeCallback(state, info->userData);
     }
     
     void SettingsWindow::AddTrackbar(const char* settingName, int& setting, int maxVal, TrackbarCallback onChangeCallback, void* userData)
@@ -39,8 +44,7 @@ namespace Tools
 	int maxVal = (int)(maxSetting * precisionCoeff);
 	FloatToIntInfo* info = new FloatToIntInfo(&setting, precisionCoeff, val, onChangeCallback, userData);
 	floatSettings[settingName] = info;
-	pair<SettingsWindow*, const char*>* params = new std::pair<SettingsWindow*, const char*>(this, settingName);
-	createTrackbar(settingName, "", &info->value, maxVal, &SettingsWindow::onFloatTrackbarChanged, (void*)params);
+	createTrackbar(settingName, "", &info->value, maxVal, &SettingsWindow::OnFloatTrackbarChanged, (void*)info);
     }
     
     void SettingsWindow::AddButton(const char* btnName, ButtonCallback onChangeCallback, void* userData)
@@ -48,9 +52,11 @@ namespace Tools
 	createButton(btnName, onChangeCallback, userData, QT_PUSH_BUTTON);
     }
     
-    void SettingsWindow::AddCheckbox(const char* chkName, ButtonCallback onChangeCallback, void* userData)
+    void SettingsWindow::AddCheckbox(const char* chkName, bool& setting, ButtonCallback onChangeCallback, void* userData)
     {
-	createButton(chkName, onChangeCallback, userData, QT_CHECKBOX, *((bool*)userData));
+	CheckboxInfo* info = new CheckboxInfo(&setting, onChangeCallback, userData);
+	boolSettings[chkName] = info;
+	createButton(chkName, &SettingsWindow::OnCheckboxChanged, (void*)info, QT_CHECKBOX, setting);
     }
 
 	

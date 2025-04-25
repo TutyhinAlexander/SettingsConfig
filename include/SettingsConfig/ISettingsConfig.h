@@ -11,21 +11,21 @@ namespace Tools
 			virtual bool Load(const char* configFilePath) = 0;
 			virtual	void Save(const char* configFilePath) = 0;
 				
-			virtual bool GetInt(const char* path, int& result) = 0;
-			virtual int GetInt(const char* path) = 0;
+			virtual bool GetInt(const char* path, int& result, int defaultVal) = 0;
+			virtual int GetInt(const char* path, int defaultVal) = 0;
 			virtual	void SetInt(const char* path, int value) = 0;
 
-			virtual bool GetFloat(const char* path, float& result) = 0;
-			virtual	float GetFloat(const char* path) = 0;
+			virtual bool GetFloat(const char* path, float& result, float defaultVal) = 0;
+			virtual	float GetFloat(const char* path, float defaultVal) = 0;
 			virtual	void SetFloat(const char* path, float value) = 0;
 			
-			virtual bool GetBool(const char* path, bool& result) = 0;
-			virtual	bool GetBool(const char* path) = 0;
+			virtual bool GetBool(const char* path, bool& result, bool defaultVal) = 0;
+			virtual	bool GetBool(const char* path, bool defaultVal) = 0;
 			virtual	void SetBool(const char* path, bool value) = 0;			
 				
-			virtual bool GetString(const char* path, const char* result) = 0;
-			virtual bool GetString(const char* path, std::string& result) = 0;
-			virtual	const char* GetString(const char* path) = 0;
+			virtual bool GetString(const char* path, const char* result, const char* defaultVal) = 0;
+			virtual bool GetString(const char* path, std::string& result, std::string defaultVal) = 0;
+			virtual	const char* GetString(const char* path, const char* defaultVal) = 0;
 			virtual	void SetString(const char* path, const char* value) = 0;
 			virtual	void SetString(const char* path, std::string value) = 0;
 	};

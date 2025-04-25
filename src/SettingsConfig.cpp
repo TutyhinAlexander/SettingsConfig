@@ -40,14 +40,12 @@ namespace Tools
 		}
 	}
 	
-	bool SettingsConfig::GetInt(const char* path, int& result) 
+	bool SettingsConfig::GetInt(const char* path, int& result, int defaultVal) 
 	{
-		bool success = cfg.lookupValue(path, result);
-		Logger::Log("  '%s' = %d\n", path, result);
-		return success;
+		return GetValue<int>(path, result, defaultVal);
 	}
 	
-	int SettingsConfig::GetInt(const char* path)
+	int SettingsConfig::GetInt(const char* path, int defaultVal)
 	{
 		return GetValue<int>(path);
 	}
@@ -57,14 +55,12 @@ namespace Tools
 		SetValue<int>(path, value, Setting::TypeInt);
 	}
 	
-	bool SettingsConfig::GetFloat(const char* path, float& result)
+	bool SettingsConfig::GetFloat(const char* path, float& result, float defaultVal)
 	{
-		bool success = cfg.lookupValue(path, result);
-		Logger::Log("  '%s' = %f\n", path, result);
-		return success;
+		return GetValue<float>(path, result, defaultVal);
 	}
 												
-	float SettingsConfig::GetFloat(const char* path)
+	float SettingsConfig::GetFloat(const char* path, float defaultVal)
 	{
 		return GetValue<float>(path);
 	}
@@ -74,14 +70,12 @@ namespace Tools
 		SetValue<float>(path, value, Setting::TypeFloat);
 	}
 	
-	bool SettingsConfig::GetBool(const char* path, bool& result)
+	bool SettingsConfig::GetBool(const char* path, bool& result, bool defaultVal)
 	{
-		bool success = cfg.lookupValue(path, result);
-		Logger::Log("  '%s' = '%s'\n", path, result ? "true" : "false");
-		return success;
+		return GetValue<bool>(path, result, defaultVal);
 	}
 	
-	bool SettingsConfig::GetBool(const char* path)
+	bool SettingsConfig::GetBool(const char* path, bool defaultVal)
 	{
 		return GetValue<bool>(path);
 	}
@@ -91,21 +85,17 @@ namespace Tools
 		SetValue<bool>(path, value, Setting::TypeBoolean);
 	}
 	
-	bool SettingsConfig::GetString(const char* path, const char* result)
+	bool SettingsConfig::GetString(const char* path, const char* result, const char* defaultVal)
 	{
-		bool success = cfg.lookupValue(path, result);
-		Logger::Log("  '%s' = '%s'\n", path, result);
-		return success;
+		return GetValue<const char*>(path, result, defaultVal);
 	}
 	
-	bool SettingsConfig::GetString(const char* path, std::string& result)
+	bool SettingsConfig::GetString(const char* path, string& result, string defaultVal)
 	{
-		bool success = cfg.lookupValue(path, result);
-		Logger::Log("  '%s' = '%s'\n", path, result.c_str());
-		return success;
+		return GetValue<string>(path, result, defaultVal);
 	}	
 			
-	const char* SettingsConfig::GetString(const char* path)
+	const char* SettingsConfig::GetString(const char* path, const char* defaultVal)
 	{
 		return GetValue<const char*>(path);
 	}

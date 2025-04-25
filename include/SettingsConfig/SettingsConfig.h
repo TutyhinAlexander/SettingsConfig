@@ -17,6 +17,16 @@ namespace Tools
 		private:
 			Config cfg;
 			
+			
+			template<class T>
+			bool GetValue(const char* path, T& result, T defaultVal)
+			{
+				bool success = cfg.lookupValue(path, result);
+				if(!success)
+					result = defaultVal;
+				return success;
+			}
+			
 			template<class T>
 			T GetValue(const char* path)
 			{
@@ -63,21 +73,21 @@ namespace Tools
 			bool Load(const char* configFilePath);
 			void Save(const char* configFilePath);
 			
-			bool GetInt(const char* path, int& result);
-			int GetInt(const char* path);
+			bool GetInt(const char* path, int& result, int defaultVal);
+			int GetInt(const char* path, int defaultVal);
 			void SetInt(const char* path, int value);
 												
-			bool GetFloat(const char* path, float& result);
-			float GetFloat(const char* path);
+			bool GetFloat(const char* path, float& result, float defaultVal);
+			float GetFloat(const char* path, float defaultVal);
 			void SetFloat(const char* path, float value);
 			
-			bool GetBool(const char* path, bool& result);
-			bool GetBool(const char* path);
+			bool GetBool(const char* path, bool& result, bool defaultVal);
+			bool GetBool(const char* path, bool defaultVal);
 			void SetBool(const char* path, bool value);
 			
-			bool GetString(const char* path, const char* result);
-			bool GetString(const char* path, std::string& result);
-			const char* GetString(const char* path);
+			bool GetString(const char* path, const char* result, const char* defaultVal);
+			bool GetString(const char* path, string& result, string defaultVal);
+			const char* GetString(const char* path, const char* defaultVal);
 			void SetString(const char* path, const char* value);
 			void SetString(const char* path, std::string value);
 			

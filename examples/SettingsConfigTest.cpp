@@ -53,18 +53,18 @@ int main()
 	
 	ctrlBar.AddButton("Save", OnSaveClicked, NULL);
 	
-	sc.GetInt("root.section.int_setting", intVal);
+	sc.GetInt("root.section.int_setting", intVal, 0);
 	Logger::Log("  intVal=%d\n", intVal);
 	ctrlBar.AddTrackbar("Int Val:", intVal, 2000);
 	
-	sc.GetFloat("root.section.float_setting", floatVal);
+	sc.GetFloat("root.section.float_setting", floatVal, 0.0f);
 	Logger::Log("  floatVal=%f\n", floatVal);
 	ctrlBar.AddTrackbar("Float Val(x100):", floatVal, 200.0f, 2);
 	
-	sc.GetString("root.section.string_setting", strVal);
+	sc.GetString("root.section.string_setting", strVal, "");
 	Logger::Log("  stringVal='%s'\n", strVal.c_str());
 	
-	sc.GetBool("root.section.bool_setting", boolVal);
+	sc.GetBool("root.section.bool_setting", boolVal, false);
 	Logger::Log("  boolVal=%s\n", boolVal ? "true" : "false");
 	ctrlBar.AddCheckbox("Bool Val:", boolVal);
 	

@@ -2,6 +2,7 @@
 #include "Logger/Logger.h"
 
 using namespace DebugTools;
+using namespace std;
 
 namespace Tools
 {
@@ -53,7 +54,7 @@ namespace Tools
 			
 	void SettingsConfig::SetInt(const char* path, int value)
 	{
-		cfg.lookup(path) = value;
+		SetValue<int>(path, value, Setting::TypeInt);
 	}
 	
 	bool SettingsConfig::GetFloat(const char* path, float& result)
@@ -70,7 +71,7 @@ namespace Tools
 			
 	void SettingsConfig::SetFloat(const char* path, float value)
 	{
-		cfg.lookup(path) = value;
+		SetValue<float>(path, value, Setting::TypeFloat);
 	}
 	
 	bool SettingsConfig::GetBool(const char* path, bool& result)
@@ -87,7 +88,7 @@ namespace Tools
 	
 	void SettingsConfig::SetBool(const char* path, bool value)
 	{
-		cfg.lookup(path) = value;
+		SetValue<bool>(path, value, Setting::TypeBoolean);
 	}
 	
 	bool SettingsConfig::GetString(const char* path, const char* result)
@@ -111,12 +112,12 @@ namespace Tools
 			
 	void SettingsConfig::SetString(const char* path, const char* value)
 	{
-		cfg.lookup(path) = value;
+		SetValue<const char*>(path, value, Setting::TypeString);
 	}
 	
-	void SettingsConfig::SetString(const char* path, std::string value)
+	void SettingsConfig::SetString(const char* path, string value)
 	{
-		cfg.lookup(path) = value;
+		SetValue<string>(path, value, Setting::TypeString);
 	}	
 
 }

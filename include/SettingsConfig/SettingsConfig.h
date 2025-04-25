@@ -4,7 +4,9 @@
 #include "Logger/Logger.h"
 #include "SettingsConfig/ISettingsConfig.h"
 #include <libconfig.h++>
+#include <string>
 
+using namespace std;
 using namespace libconfig;
 using namespace DebugTools;
 
@@ -31,6 +33,30 @@ namespace Tools
 					Logger::Log("Setting type exception: '%s'\n", path);
 				}
 				return T();
+			}
+
+			template<class T>
+			void SetValue(const char* path, T value, Setting::Type type)
+			{
+				try
+				{
+					cfg.lookup(path) = value;
+				}
+				catch(SettingNotFoundException &ex)
+				{
+					Logger::Log("SettingsConfig::SetValue exception '%s' path: '%s'\n", ex.what(), ex.getPath());
+					string srcPath(path);
+					size_t found = srcPath.rfind('.');
+					if (found != string::npos)
+					{
+						string parentPath = srcPath.substr(0, found);
+						string settingName = srcPath.substr(found + 1);
+						Logger::Log("SettingsConfig::SetValue parentPath '%s' settingName: '%s'\n", parentPath.c_str(), settingName.c_str());
+			
+						Setting& parentSetting = cfg.lookup(parentPath);
+						parentSetting.add(settingName, type) = value;
+					}
+				}
 			}
 			
 		public:

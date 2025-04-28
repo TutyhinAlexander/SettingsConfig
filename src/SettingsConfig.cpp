@@ -11,16 +11,16 @@ namespace Tools
 		try
 		{
 			cfg.readFile(configFilePath);
-			Logger::Log("SettingsConfig::Load Configuration successfully loaded from: '%s'\n", configFilePath);
+			LOG("SettingsConfig::Load Configuration successfully loaded from: '%s'\n", configFilePath);
 		}
 		catch(const FileIOException &fioex)
 		{
-			Logger::Log("SettingsConfig::Load I/O error while reading file.");
+			LOG("SettingsConfig::Load I/O error while reading file.");
 			return false;
 		}
 		catch(const ParseException &pex)
 		{
-			Logger::Log("SettingsConfig::Load Parse error at '%s' : %d - '%s'", pex.getFile(), pex.getLine(), pex.getError());
+			LOG("SettingsConfig::Load Parse error at '%s' : %d - '%s'", pex.getFile(), pex.getLine(), pex.getError());
 			return false;
 		}
 		return true;
@@ -31,12 +31,12 @@ namespace Tools
 		try
 		{
 			cfg.writeFile(configFilePath);
-			Logger::Log("SettingsConfig::Save Updated configuration successfully written to: '%s'\n", configFilePath);
+			LOG("SettingsConfig::Save Updated configuration successfully written to: '%s'\n", configFilePath);
 
 		}
 		catch(const FileIOException &fioex)
 		{
-			Logger::Log("SettingsConfig::Save I/O error while writing file: '%s'\n", configFilePath);
+			LOG("SettingsConfig::Save I/O error while writing file: '%s'\n", configFilePath);
 		}
 	}
 	

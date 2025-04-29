@@ -19,18 +19,18 @@ bool boolVal;
 
 void InitLogger()
 {
-	Logger::Log("InitLogger\n");
+	LOG("InitLogger\n");
 	LoggerParams params;
 	params.useTimestamp = false;
 	params.logToConsole = true;
-	//params.fileName = "SCT";
-	//params.maxLogFiles = 10;
+	params.fileName = "SCT";
+	params.maxLogFiles = 10;
 	Logger::Init(params);
 }
 
 void OnSaveClicked(int state, void *userdata)
 {
-	Logger::Log("Save data to '%s':\n", CONFIG_PATH);
+	LOG("Save data to '%s':\n", CONFIG_PATH);
 	
 	sc.SetInt("root.section.int_setting", intVal);
 	sc.SetFloat("root.section.float_setting", floatVal);
@@ -42,30 +42,30 @@ void OnSaveClicked(int state, void *userdata)
 int main()
 {
 	InitLogger();
-	Logger::Log("START...\n");	
+	LOG("START...\n");	
 	
 	sc.Load(CONFIG_PATH);
 	
 	namedWindow("Image", WINDOW_NORMAL);	
 	SettingsWindow ctrlBar;
 	
-	Logger::Log("load data from '%s':\n", CONFIG_PATH);
+	LOG("load data from '%s':\n", CONFIG_PATH);
 	
 	ctrlBar.AddButton("Save", OnSaveClicked, NULL);
 	
 	sc.GetInt("root.section.int_setting", intVal, 0);
-	Logger::Log("  intVal=%d\n", intVal);
+	LOG("  intVal=%d\n", intVal);
 	ctrlBar.AddTrackbar("Int Val:", intVal, 2000);
 	
 	sc.GetFloat("root.section.float_setting", floatVal, 0.0f);
-	Logger::Log("  floatVal=%f\n", floatVal);
+	LOG("  floatVal=%f\n", floatVal);
 	ctrlBar.AddTrackbar("Float Val(x100):", floatVal, 200.0f, 2);
 	
 	sc.GetString("root.section.string_setting", strVal, "");
-	Logger::Log("  stringVal='%s'\n", strVal.c_str());
+	LOG("  stringVal='%s'\n", strVal.c_str());
 	
 	sc.GetBool("root.section.bool_setting", boolVal, false);
-	Logger::Log("  boolVal=%s\n", boolVal ? "true" : "false");
+	LOG("  boolVal=%s\n", boolVal ? "true" : "false");
 	ctrlBar.AddCheckbox("Bool Val:", boolVal);
 	
 	
@@ -77,6 +77,6 @@ int main()
 			break;
 	}
 	
-	Logger::Log("END\n");
+	LOG("END\n");
 	return 0;
 }

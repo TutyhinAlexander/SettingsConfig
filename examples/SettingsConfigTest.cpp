@@ -68,6 +68,16 @@ int main()
 	LOG("  boolVal=%s\n", boolVal ? "true" : "false");
 	ctrlBar.AddCheckbox("Bool Val:", boolVal);
 	
+	/// inventory
+	int itemsCount = sc.GetDataArrayLength("root.inventory");
+	LOG("Inventory itemsCount=%d\n", itemsCount);
+	for(int i = 0; i < itemsCount; ++i)
+	{
+		LOG("i=%d id=%d name='%s' price=%f rare=%s\n", i, sc.GetDataArrayItemIntField("root.inventory", i, "id"), sc.GetDataArrayItemStringField("root.inventory", i, "name"), 
+			sc.GetDataArrayItemFloatField("root.inventory", i, "price"),
+			LOG_BOOL(sc.GetDataArrayItemBoolField("root.inventory", i, "rare")));
+	}
+	
 	
 	Mat img(512, 512, CV_8UC3, Scalar(255, 255, 255));
 	while(true)

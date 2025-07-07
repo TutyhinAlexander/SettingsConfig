@@ -109,5 +109,41 @@ namespace Tools
 	{
 		SetValue<string>(path, value, Setting::TypeString);
 	}	
+	
+	int SettingsConfig::GetDataArrayLength(const char* path)
+	{
+		try
+		{
+			return cfg.lookup(path).getLength();
+		}
+		catch(const SettingNotFoundException &nfex)
+		{
+			Logger::Log("GetDataArrayLength - Setting not found: '%s'\n", path);
+		}
+		catch(const SettingTypeException tex)
+		{
+			Logger::Log("GetDataArrayLength - Setting type exception: '%s'\n", path);
+		}
+		return -1;
+	}
+	
+	int SettingsConfig::GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName)
+	{
+		return GetDataArrayItemField<int>(arrayPath, itemIndex, fieldName);
+	}
 
+	float SettingsConfig::GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName)
+	{
+		return GetDataArrayItemField<float>(arrayPath, itemIndex, fieldName);
+	}
+	
+	bool SettingsConfig::GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName)
+	{
+		return GetDataArrayItemField<bool>(arrayPath, itemIndex, fieldName);
+	}
+	
+	const char* SettingsConfig::GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName)
+	{
+		return GetDataArrayItemField<const char*>(arrayPath, itemIndex, fieldName);
+	}
 }

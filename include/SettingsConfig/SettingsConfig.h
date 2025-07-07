@@ -69,28 +69,51 @@ namespace Tools
 				}
 			}
 			
+			template<class T>
+			T GetDataArrayItemField(const char* arrayPath, int itemIndex, const char* fieldName)
+			{
+				try
+				{
+					return cfg.lookup(arrayPath)[itemIndex].lookup(fieldName);
+				}
+				catch(const SettingNotFoundException &nfex)
+				{
+					Logger::Log("Setting not found: '%s' itemIndex=%d fieldName='%s'\n", arrayPath, itemIndex, fieldName);
+				}
+				catch(const SettingTypeException tex)
+				{
+					Logger::Log("Setting type exception: '%s' itemIndex=%d fieldName='%s'\n", arrayPath, itemIndex, fieldName);
+				}
+				return T();
+			}
+			
 		public:
-			bool Load(const char* configFilePath);
-			void Save(const char* configFilePath);
+			virtual bool Load(const char* configFilePath);
+			virtual void Save(const char* configFilePath);
 			
-			bool GetInt(const char* path, int& result, int defaultVal);
-			int GetInt(const char* path, int defaultVal);
-			void SetInt(const char* path, int value);
+			virtual bool GetInt(const char* path, int& result, int defaultVal);
+			virtual int GetInt(const char* path, int defaultVal);
+			virtual void SetInt(const char* path, int value);
 												
-			bool GetFloat(const char* path, float& result, float defaultVal);
-			float GetFloat(const char* path, float defaultVal);
-			void SetFloat(const char* path, float value);
+			virtual bool GetFloat(const char* path, float& result, float defaultVal);
+			virtual float GetFloat(const char* path, float defaultVal);
+			virtual void SetFloat(const char* path, float value);
 			
-			bool GetBool(const char* path, bool& result, bool defaultVal);
-			bool GetBool(const char* path, bool defaultVal);
-			void SetBool(const char* path, bool value);
+			virtual bool GetBool(const char* path, bool& result, bool defaultVal);
+			virtual bool GetBool(const char* path, bool defaultVal);
+			virtual void SetBool(const char* path, bool value);
 			
-			bool GetString(const char* path, const char* result, const char* defaultVal);
-			bool GetString(const char* path, string& result, string defaultVal);
-			const char* GetString(const char* path, const char* defaultVal);
-			void SetString(const char* path, const char* value);
-			void SetString(const char* path, std::string value);
+			virtual bool GetString(const char* path, const char* result, const char* defaultVal);
+			virtual bool GetString(const char* path, string& result, string defaultVal);
+			virtual const char* GetString(const char* path, const char* defaultVal);
+			virtual void SetString(const char* path, const char* value);
+			virtual void SetString(const char* path, std::string value);
 			
+			virtual int GetDataArrayLength(const char* path);
+			virtual int GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName);
+			virtual float GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName);
+			virtual bool GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName);
+			virtual const char* GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName);
 	};
 }
 

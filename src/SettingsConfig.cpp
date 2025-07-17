@@ -127,23 +127,23 @@ namespace Tools
 		return -1;
 	}
 	
-	int SettingsConfig::GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName)
+	int SettingsConfig::GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName, int defVal)
 	{
-		return GetDataArrayItemField<int>(arrayPath, itemIndex, fieldName);
+		return GetDataArrayItemField<int>(arrayPath, itemIndex, fieldName, defVal);
 	}
 
-	float SettingsConfig::GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName)
+	float SettingsConfig::GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName, float defVal)
 	{
-		return GetDataArrayItemField<float>(arrayPath, itemIndex, fieldName);
+		return GetDataArrayItemField<float>(arrayPath, itemIndex, fieldName, defVal);
 	}
 	
-	bool SettingsConfig::GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName)
+	bool SettingsConfig::GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName, bool defVal)
 	{
-		return GetDataArrayItemField<bool>(arrayPath, itemIndex, fieldName);
+		return GetDataArrayItemField<bool>(arrayPath, itemIndex, fieldName, defVal);
 	}
 	
-	const char* SettingsConfig::GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName)
+	const char* SettingsConfig::GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName, const char* defVal)
 	{
-		return GetDataArrayItemField<const char*>(arrayPath, itemIndex, fieldName);
+		return GetDataArrayItemField<const char*>(arrayPath, itemIndex, fieldName, defVal);
 	}
 }

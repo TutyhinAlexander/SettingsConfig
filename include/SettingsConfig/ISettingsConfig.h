@@ -31,10 +31,10 @@ namespace Tools
 			
 			//   inventory = ({id = 0; name = "item1"; price = 10; rare = false;}, {id = 1; name = "item1"; price = 20; rare = true;} );
 			virtual int GetDataArrayLength(const char* path) = 0;
-			virtual int GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName) = 0;
-			virtual float GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName) = 0;
-			virtual bool GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName) = 0;
-			virtual const char* GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName) = 0;
+			virtual int GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName, int defVal) = 0;
+			virtual float GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName, float defVal) = 0;
+			virtual bool GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName, bool defVal) = 0;
+			virtual const char* GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName, const char* defVal) = 0;
 	};
 }
 

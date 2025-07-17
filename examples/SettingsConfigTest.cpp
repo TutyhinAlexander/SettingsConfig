@@ -73,9 +73,9 @@ int main()
 	LOG("Inventory itemsCount=%d\n", itemsCount);
 	for(int i = 0; i < itemsCount; ++i)
 	{
-		LOG("i=%d id=%d name='%s' price=%f rare=%s\n", i, sc.GetDataArrayItemIntField("root.inventory", i, "id"), sc.GetDataArrayItemStringField("root.inventory", i, "name"), 
-			sc.GetDataArrayItemFloatField("root.inventory", i, "price"),
-			LOG_BOOL(sc.GetDataArrayItemBoolField("root.inventory", i, "rare")));
+		LOG("i=%d id=%d name='%s' price=%f rare=%s\n", i, sc.GetDataArrayItemIntField("root.inventory", i, "id", 0), sc.GetDataArrayItemStringField("root.inventory", i, "name", "unknown"), 
+			sc.GetDataArrayItemFloatField("root.inventory", i, "price", 0.0f),
+			LOG_BOOL(sc.GetDataArrayItemBoolField("root.inventory", i, "rare", false)));
 	}
 	
 	

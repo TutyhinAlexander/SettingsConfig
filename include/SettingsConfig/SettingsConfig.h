@@ -70,7 +70,7 @@ namespace Tools
 			}
 			
 			template<class T>
-			T GetDataArrayItemField(const char* arrayPath, int itemIndex, const char* fieldName)
+			T GetDataArrayItemField(const char* arrayPath, int itemIndex, const char* fieldName, T defaultVal = T())
 			{
 				try
 				{
@@ -84,7 +84,7 @@ namespace Tools
 				{
 					Logger::Log("Setting type exception: '%s' itemIndex=%d fieldName='%s'\n", arrayPath, itemIndex, fieldName);
 				}
-				return T();
+				return defaultVal;
 			}
 			
 		public:
@@ -110,10 +110,10 @@ namespace Tools
 			virtual void SetString(const char* path, std::string value);
 			
 			virtual int GetDataArrayLength(const char* path);
-			virtual int GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName);
-			virtual float GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName);
-			virtual bool GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName);
-			virtual const char* GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName);
+			virtual int GetDataArrayItemIntField(const char* arrayPath, int itemIndex, const char* fieldName, int defVal);
+			virtual float GetDataArrayItemFloatField(const char* arrayPath, int itemIndex, const char* fieldName, float defVal);
+			virtual bool GetDataArrayItemBoolField(const char* arrayPath, int itemIndex, const char* fieldName, bool defVal);
+			virtual const char* GetDataArrayItemStringField(const char* arrayPath, int itemIndex, const char* fieldName, const char* defVal);
 	};
 }
 
